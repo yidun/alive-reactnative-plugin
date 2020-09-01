@@ -55,7 +55,7 @@ RCT_EXPORT_METHOD(startLiveDetect) {
 
      [self.detector setTimeoutInterval:30];
      __weak __typeof(self)weakSelf = self;
-     [self.detector startLiveDetectWithBusinessID:@"6a1a399443a54d31b91896a4208bf6e0" actionsHandler:^(NSDictionary * _Nonnull params) {
+     [self.detector startLiveDetectWithBusinessID:@"请填写自己的BusinessID" actionsHandler:^(NSDictionary * _Nonnull params) {
          dispatch_async(dispatch_get_main_queue(), ^{
              NSString *actions = [params objectForKey:@"actions"];
              if (actions && actions.length != 0) {
