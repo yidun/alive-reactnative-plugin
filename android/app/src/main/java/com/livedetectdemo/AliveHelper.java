@@ -28,7 +28,7 @@ public class AliveHelper {
 
 
     public void init(Context context, NISCameraPreview cameraPreview) {
-        AliveDetector.getInstance().init(context, cameraPreview, "6a1a399443a54d31b91896a4208bf6e0");
+        AliveDetector.getInstance().init(context, cameraPreview, "请填写从易盾官网申请的业务ID");
         AliveDetector.getInstance().setTimeOut(1000 * 30);
     }
 
