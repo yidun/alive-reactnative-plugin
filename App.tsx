@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
-import {SafeAreaView, View, Text} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {SafeAreaView, View, Text, DeviceEventEmitter} from 'react-native';
 import LiveDetect from './LiveDetect';
 import LiveDetectTip from './LiveDetectTip';
 import Modal from 'react-native-modal';
@@ -15,9 +15,56 @@ const App = () => {
   const [resultMessage, setResultMessage] = useState<string>();
   const [token, setToken] = useState<string>();
 
-  const handleActionChange = (e: {nativeEvent: {actions: string}}) => {
-    const {actions = ''} = e.nativeEvent; // 0——正面，1——右转，2——左转，3——张嘴，4——眨眼
+  useEffect(() => {
+    const actionListener = DeviceEventEmitter.addListener(
+      'onActionChange',
+      ({actions = ''}) => {
+        if (actions.length > 0) {
+          setActions(actions.split('').map((item: string) => +item));
+        }
+      },
+    );
+    const warnListener = DeviceEventEmitter.addListener(
+      'onWarnChange',
+      ({message = ''}) => {
+        setWarnMessage(message);
+      },
+    );
+    const stepListener = DeviceEventEmitter.addListener(
+      'onStepChange',
+      ({currentStep, message}) => {
+        console.log(currentStep, message);
+        setWarnMessage('');
+        if (message) {
+          setTipMessage(message);
+        }
+        if (currentStep) {
+          setCurrentStep(currentStep);
+        }
+      },
+    );
+    const resultListener = DeviceEventEmitter.addListener(
+      'onResultChange',
+      ({message, token}) => {
+        console.log(token, message);
+        setWarnMessage('');
+        setVisible(true);
+        setResultMessage(message);
+        setToken(token);
+      },
+    );
 
+    return () => {
+      actionListener.remove();
+      warnListener.remove();
+      stepListener.remove();
+      resultListener.remove();
+    };
+  }, []);
+
+  const handleActionChange = (e: {nativeEvent: {actions: string}}) => {
+    console.log('人脸识别动作：', e);
+    const {actions = ''} = e.nativeEvent; // 0——正面，1——右转，2——左转，3——张嘴，4——眨眼
     if (actions.length > 0) {
       setActions(actions.split('').map((item) => +item));
     }
@@ -28,6 +75,7 @@ const App = () => {
       message?: string;
     };
   }) => {
+    console.log('人脸识别报错：', e);
     const {message} = e.nativeEvent;
     setWarnMessage(message);
   };
@@ -35,6 +83,7 @@ const App = () => {
   const handleStepChange = (e: {
     nativeEvent: {message?: string; currentStep?: number};
   }) => {
+    console.log('人脸识别步骤：', e);
     setWarnMessage('');
     const {message, currentStep} = e.nativeEvent;
     if (message) {
@@ -48,6 +97,7 @@ const App = () => {
   const handleResultChange = (e: {
     nativeEvent: {message?: string; token?: string};
   }) => {
+    console.log('人脸识别结果：', e);
     const {message, token} = e.nativeEvent;
     setWarnMessage('');
     setVisible(true);
@@ -79,7 +129,6 @@ const App = () => {
             height: 250,
             borderRadius: 125,
             overflow: 'hidden',
-            backgroundColor: '#ffffff',
             justifyContent: 'center',
             alignItems: 'center',
           }}
@@ -107,3 +156,5 @@ const App = () => {
 };
 
 export default App;
+
+
