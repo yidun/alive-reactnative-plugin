@@ -1,4 +1,4 @@
-package com.livedetectdemo;
+package com.livedetectdemo.livedetect;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
@@ -16,6 +16,7 @@ public class AliveViewManager implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
+        modules.add((new AliveHelperModule()));
         return modules;
     }
 

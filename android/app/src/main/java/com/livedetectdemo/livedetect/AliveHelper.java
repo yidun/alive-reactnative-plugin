@@ -1,4 +1,4 @@
-package com.livedetectdemo;
+package com.livedetectdemo.livedetect;
 
 import android.content.Context;
 import android.util.Log;
@@ -28,7 +28,7 @@ public class AliveHelper {
 
 
     public void init(Context context, NISCameraPreview cameraPreview) {
-        AliveDetector.getInstance().init(context, cameraPreview, "请填写从易盾官网申请的业务ID");
+        AliveDetector.getInstance().init(context, cameraPreview, "74cb47d7d3174aadb75f4067f0280169");
         AliveDetector.getInstance().setTimeOut(1000 * 30);
     }
 
@@ -82,13 +82,14 @@ public class AliveHelper {
                 WritableMap event = Arguments.createMap();
                 event.putString("message", msg);
                 event.putString("token", token);
-                sendEvent("onResultChange", event);
+                sendEvent("onWarnChange", event);
             }
 
             @Override
             public void onOverTime() {
                 WritableMap event = Arguments.createMap();
-                event.putString("message", "timeout");
+                event.putString("message", "操作超时，用户未在规定时间内完成动作");
+                event.putString("token", "");
                 sendEvent("onResultChange", event);
             }
         });

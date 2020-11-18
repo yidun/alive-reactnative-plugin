@@ -1,11 +1,19 @@
 /* eslint-disable no-shadow */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
-import {SafeAreaView, View, Text, DeviceEventEmitter} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  DeviceEventEmitter,
+  NativeModules,
+  Button,
+} from 'react-native';
 import LiveDetect from './LiveDetect';
 import LiveDetectTip from './LiveDetectTip';
 import Modal from 'react-native-modal';
 
+const AliveHelper = NativeModules.AliveHelper;
 const App = () => {
   const [actions, setActions] = useState<number[]>([]);
   const [warnMessage, setWarnMessage] = useState<string>();
@@ -15,77 +23,25 @@ const App = () => {
   const [resultMessage, setResultMessage] = useState<string>();
   const [token, setToken] = useState<string>();
 
-  useEffect(() => {
-    const actionListener = DeviceEventEmitter.addListener(
-      'onActionChange',
-      ({actions = ''}) => {
-        if (actions.length > 0) {
-          setActions(actions.split('').map((item: string) => +item));
-        }
-      },
-    );
-    const warnListener = DeviceEventEmitter.addListener(
-      'onWarnChange',
-      ({message = ''}) => {
-        setWarnMessage(message);
-      },
-    );
-    const stepListener = DeviceEventEmitter.addListener(
-      'onStepChange',
-      ({currentStep, message}) => {
-        console.log(currentStep, message);
-        setWarnMessage('');
-        if (message) {
-          setTipMessage(message);
-        }
-        if (currentStep) {
-          setCurrentStep(currentStep);
-        }
-      },
-    );
-    const resultListener = DeviceEventEmitter.addListener(
-      'onResultChange',
-      ({message, token}) => {
-        console.log(token, message);
-        setWarnMessage('');
-        setVisible(true);
-        setResultMessage(message);
-        setToken(token);
-      },
-    );
-
-    return () => {
-      actionListener.remove();
-      warnListener.remove();
-      stepListener.remove();
-      resultListener.remove();
-    };
-  }, []);
-
-  const handleActionChange = (e: {nativeEvent: {actions: string}}) => {
-    console.log('人脸识别动作：', e);
-    const {actions = ''} = e.nativeEvent; // 0——正面，1——右转，2——左转，3——张嘴，4——眨眼
+  const handleActionChange = ({actions = ''}: {actions: string}) => {
+    // 0——正面，1——右转，2——左转，3——张嘴，4——眨眼
     if (actions.length > 0) {
       setActions(actions.split('').map((item) => +item));
     }
   };
 
-  const handleWarnChange = (e: {
-    nativeEvent: {
-      message?: string;
-    };
-  }) => {
-    console.log('人脸识别报错：', e);
-    const {message} = e.nativeEvent;
+  const handleWarnChange = ({message}: {message?: string}) => {
     setWarnMessage(message);
   };
 
-  const handleStepChange = (e: {
-    nativeEvent: {message?: string; currentStep?: number};
+  const handleStepChange = ({
+    message,
+    currentStep,
+  }: {
+    message?: string;
+    currentStep?: number;
   }) => {
-    console.log('人脸识别步骤：', e);
     setWarnMessage('');
-    const {message, currentStep} = e.nativeEvent;
     if (message) {
       setTipMessage(message);
     }
@@ -94,16 +50,46 @@ const App = () => {
     }
   };
 
-  const handleResultChange = (e: {
-    nativeEvent: {message?: string; token?: string};
-  }) => {
-    console.log('人脸识别结果：', e);
-    const {message, token} = e.nativeEvent;
-    setWarnMessage('');
-    setVisible(true);
-    setResultMessage(message);
-    setToken(token);
-  };
+  const handleResultChange = useCallback(
+    ({message, token}: {message?: string; token?: string}) => {
+      setWarnMessage('');
+      setVisible(true);
+      setResultMessage(message);
+      setToken(token);
+    },
+    [],
+  );
+
+  /** 监听在android上生效，在ios上不生效 */
+  useEffect(() => {
+    const actionListener = DeviceEventEmitter.addListener(
+      'onActionChange',
+      handleActionChange,
+    );
+    const warnListener = DeviceEventEmitter.addListener(
+      'onWarnChange',
+      handleWarnChange,
+    );
+    const stepListener = DeviceEventEmitter.addListener(
+      'onStepChange',
+      handleStepChange,
+    );
+    const resultListener = DeviceEventEmitter.addListener(
+      'onResultChange',
+      handleResultChange,
+    );
+
+    return () => {
+      actionListener.remove();
+      warnListener.remove();
+      stepListener.remove();
+      resultListener.remove();
+    };
+  }, [handleResultChange]);
+
+  useEffect(() => {
+    return () => AliveHelper.stopAlive();
+  }, []);
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -113,6 +99,7 @@ const App = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
+        <Button onPress={() => AliveHelper.startAlive()} title="重新开始" />
         <View
           style={{
             justifyContent: 'center',
@@ -129,13 +116,15 @@ const App = () => {
             height: 250,
             borderRadius: 125,
             overflow: 'hidden',
+            backgroundColor: '#ffffff',
             justifyContent: 'center',
             alignItems: 'center',
           }}
-          onActionChange={handleActionChange}
-          onWarnChange={handleWarnChange}
-          onStepChange={handleStepChange}
-          onResultChange={handleResultChange}
+          /** 以下4个监听在IOS上生效，在android不生效 */
+          onActionChange={(e) => handleActionChange(e.nativeEvent)}
+          onWarnChange={(e) => handleWarnChange(e.nativeEvent)}
+          onStepChange={(e) => handleStepChange(e.nativeEvent)}
+          onResultChange={(e) => handleResultChange(e.nativeEvent)}
         />
         <LiveDetectTip {...{tipMessage, actions, currentStep}} />
       </View>
@@ -156,5 +145,3 @@ const App = () => {
 };
 
 export default App;
-
-
