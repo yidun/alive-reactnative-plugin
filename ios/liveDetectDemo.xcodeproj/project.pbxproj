@@ -19,9 +19,6 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		BDD233D207A1165879D90CC9 /* libPods-liveDetectDemo-liveDetectDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B925820B311B36E72ADB75 /* libPods-liveDetectDemo-liveDetectDemoTests.a */; };
 		E43011C424F5063B0016C89F /* ImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E43011C324F5063B0016C89F /* ImageView.m */; };
-		E43011C624F509390016C89F /* NTESRNLiveDetectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E43011C524F509390016C89F /* NTESRNLiveDetectManager.m */; };
-		E43011CA24F5159B0016C89F /* NTESRNLiveDetectView.m in Sources */ = {isa = PBXBuildFile; fileRef = E43011C924F5159B0016C89F /* NTESRNLiveDetectView.m */; };
-		E48325B12562B27F00350BF5 /* AliveHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E48325AF2562B27F00350BF5 /* AliveHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +47,6 @@
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = liveDetectDemo/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = liveDetectDemo/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = liveDetectDemo/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = liveDetectDemo/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = liveDetectDemo/main.m; sourceTree = "<group>"; };
 		14AB0C238D862969C558B695 /* Pods-liveDetectDemo-liveDetectDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-liveDetectDemo-liveDetectDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-liveDetectDemo-liveDetectDemoTests/Pods-liveDetectDemo-liveDetectDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* liveDetectDemo-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "liveDetectDemo-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,13 +56,8 @@
 		91B925820B311B36E72ADB75 /* libPods-liveDetectDemo-liveDetectDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-liveDetectDemo-liveDetectDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A994584C393F48213CAE75B0 /* Pods-liveDetectDemo-liveDetectDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-liveDetectDemo-liveDetectDemoTests.release.xcconfig"; path = "Target Support Files/Pods-liveDetectDemo-liveDetectDemoTests/Pods-liveDetectDemo-liveDetectDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		BEC7BECF871265BDD74B8883 /* libPods-liveDetectDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-liveDetectDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA500F4026147C14009C9741 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = liveDetectDemo/Info.plist; sourceTree = "<group>"; };
 		E43011C324F5063B0016C89F /* ImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ImageView.m; path = liveDetectDemo/ImageView.m; sourceTree = "<group>"; };
-		E43011C524F509390016C89F /* NTESRNLiveDetectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESRNLiveDetectManager.m; sourceTree = "<group>"; };
-		E43011C724F5093F0016C89F /* NTESRNLiveDetectManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NTESRNLiveDetectManager.h; sourceTree = "<group>"; };
-		E43011C824F515940016C89F /* NTESRNLiveDetectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NTESRNLiveDetectView.h; sourceTree = "<group>"; };
-		E43011C924F5159B0016C89F /* NTESRNLiveDetectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESRNLiveDetectView.m; sourceTree = "<group>"; };
-		E48325AF2562B27F00350BF5 /* AliveHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AliveHelper.m; sourceTree = "<group>"; };
-		E48325B02562B27F00350BF5 /* AliveHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliveHelper.h; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -125,17 +116,11 @@
 		13B07FAE1A68108700A75B9A /* liveDetectDemo */ = {
 			isa = PBXGroup;
 			children = (
+				CA500F4026147C14009C9741 /* Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
-				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
-				E43011C524F509390016C89F /* NTESRNLiveDetectManager.m */,
-				E43011C924F5159B0016C89F /* NTESRNLiveDetectView.m */,
-				E43011C824F515940016C89F /* NTESRNLiveDetectView.h */,
-				E48325B02562B27F00350BF5 /* AliveHelper.h */,
-				E48325AF2562B27F00350BF5 /* AliveHelper.m */,
-				E43011C724F5093F0016C89F /* NTESRNLiveDetectManager.h */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				E43011C324F5063B0016C89F /* ImageView.m */,
 			);
@@ -373,7 +358,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		056B7EF41E991548B4FC9995 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -528,10 +513,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				E43011C424F5063B0016C89F /* ImageView.m in Sources */,
-				E43011C624F509390016C89F /* NTESRNLiveDetectManager.m in Sources */,
-				E48325B12562B27F00350BF5 /* AliveHelper.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				E43011CA24F5159B0016C89F /* NTESRNLiveDetectView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,6 +625,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AFKBK6V32D;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = liveDetectDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (

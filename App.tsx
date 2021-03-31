@@ -99,7 +99,9 @@ const App = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <Button onPress={() => AliveHelper.startAlive()} title="重新开始" />
+               
+        <Button onPress={() =>  AliveHelper.initWithBusinessID('请输入易盾业务ID',30,)} title="初始化SDK" />
+        <Button onPress={() => AliveHelper.startAlive()} title="开始活体检测" />
         <View
           style={{
             justifyContent: 'center',
